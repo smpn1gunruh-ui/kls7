@@ -23,8 +23,7 @@
       exam_title: "Penilaian Bab 1 - Berpikir Komputasional",
       school_name: "SMP Negeri 1 Gunungguruh",
       subject_info: "Informatika Kelas 7",
-      background_color: "#f0f9ff",
-      guru_pin: "1234"
+      background_color: "#f0f9ff"
     };
 
     // ===================== SOAL BAB 1 =====================
@@ -85,9 +84,7 @@
     }
 
     function shuffleQuestions() {
-      // acak urutan soal
       questions = shuffleArray(questions.map(q => {
-        // acak juga urutan opsi tiap soal
         const opts = q.options.map((o, i) => ({text: o, isCorrect: i === q.correct}));
         const shuffled = shuffleArray(opts);
         return {
@@ -119,27 +116,57 @@
     function selectAnswer(i){if(!state.locked){state.answers[state.current]=i;render();}}
     function navigate(d){if(!state.locked){const n=state.current+d;if(n>=0&&n<questions.length)state.current=n;render();}}
     function calculateScore(){let correct=0;state.answers.forEach((ans,i)=>{if(ans===questions[i].correct)correct++;});return Math.round((correct/questions.length)*100);}
-    function submitExam(){clearInterval(state.timer);const score=calculateScore();const correct=state.answers.filter((a,i)=>a===questions[i].correct).length;const data={name:state.studentName,class:state.studentClass,score,correct,total:questions.length,date:new Date().toLocaleString()};const saved=JSON.parse(localStorage.getItem('hasilUjian')||"[]");saved.push(data);localStorage.setItem('hasilUjian',JSON.stringify(saved));state.screen='result';state.finalScore=score;state.correct=correct;render();}
 
-    function exportCSV(){const data=JSON.parse(localStorage.getItem('hasilUjian')||"[]");if(data.length===0){alert("Belum ada data tersimpan.");return;}let csv="Nama,Kelas,Nilai,Benar,Total,Waktu\n";data.forEach(d=>{csv+=`${d.name},${d.class},${d.score},${d.correct},${d.total},${d.date}\n`;});const blob=new Blob([csv],{type:"text/csv"});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download="hasil_ujian_informatika.csv";a.click();URL.revokeObjectURL(url);}
-    function showGuruView(){const data=JSON.parse(localStorage.getItem('hasilUjian')||"[]");const app=document.getElementById('app');app.innerHTML=`<div class="min-h-full bg-sky-50 p-6"><h1 class="text-2xl font-bold mb-4 text-center">📋 Daftar Hasil Ujian</h1>${data.length===0?`<p class='text-center'>Belum ada data ujian.</p>`:`<div class='overflow-x-auto bg-white rounded-xl shadow p-4'><table class='w-full border text-sm'><thead class='bg-sky-100'><tr><th class='border px-2 py-1'>No</th><th class='border px-2 py-1'>Nama</th><th class='border px-2 py-1'>Kelas</th><th class='border px-2 py-1'>Nilai</th><th class='border px-2 py-1'>Benar</th><th class='border px-2 py-1'>Tanggal</th></tr></thead><tbody>${data.map((d,i)=>`<tr class='hover:bg-sky-50'><td class='border px-2 py-1 text-center'>${i+1}</td><td class='border px-2 py-1'>${d.name}</td><td class='border px-2 py-1 text-center'>${d.class}</td><td class='border px-2 py-1 text-center'>${d.score}</td><td class='border px-2 py-1 text-center'>${d.correct}/${d.total}</td><td class='border px-2 py-1 text-center'>${d.date}</td></tr>`).join('')}</tbody></table></div>`}<div class='flex justify-center gap-4 mt-6'><button id='export' class='bg-green-600 text-white px-5 py-2 rounded-lg font-semibold'>Ekspor CSV</button><button id='back' class='border border-sky-600 text-sky-700 px-5 py-2 rounded-lg font-semibold'>Kembali</button></div></div>`;document.getElementById('export').onclick=exportCSV;document.getElementById('back').onclick=()=>{state.screen='start';render();};}
+    // ===================== SIMPAN OTOMATIS KE SPREADSHEET =====================
+    function submitExam(){
+      clearInterval(state.timer);
+      const score = calculateScore();
+      const correct = state.answers.filter((a,i)=>a===questions[i].correct).length;
+const data = {
+  name: state.studentName,
+  class: state.studentClass,
+  score,
+  correct,
+  total: questions.length,
+  date: new Date().toLocaleString(),
+  bab: "Bab 1 - Berpikir Komputasional" // tambahkan baris ini
+};
+
+      // Tetap simpan lokal
+      const saved = JSON.parse(localStorage.getItem('hasilUjian') || "[]");
+      saved.push(data);
+      localStorage.setItem('hasilUjian', JSON.stringify(saved));
+
+      // 🔄 Kirim otomatis ke Google Spreadsheet
+      fetch("https://script.google.com/macros/s/AKfycbzVTgd56dfUMSHugbPkAJlMIpWJ0RDFI8frj4u4hxFSQRWwgDiXAO45WlssyL-KReBwwA/exec", { // GANTI DENGAN URL MILIKMU
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      // Tampilkan hasil akhir
+      state.screen = 'result';
+      state.finalScore = score;
+      state.correct = correct;
+      render();
+    }
 
     // ===================== RENDER =====================
     function render(){
       const app=document.getElementById('app'),s=config;
       if(state.screen==='start'){
-        app.innerHTML=`<div class='flex h-full items-center justify-center bg-[${s.background_color}] p-4'><div class='max-w-md w-full bg-white p-8 rounded-2xl shadow-xl'><h1 class='text-2xl font-bold text-center mb-2'>${s.exam_title}</h1><p class='text-center mb-1'>${s.school_name}</p><p class='text-center mb-6'>${s.subject_info}</p><div class='mb-4'><label class='font-semibold'>Nama Siswa</label><input id='name' type='text' class='w-full border rounded-lg p-3 mt-2' placeholder='Nama lengkap'></div><div class='mb-6'><label class='font-semibold'>Kelas</label><select id='class' class='w-full border rounded-lg p-3 mt-2'><option value=''>Pilih Kelas</option><option>7.1</option><option>7.2</option><option>7.3</option><option>7.4</option><option>7.5</option><option>7.6</option><option>7.7</option></select></div><button id='start' class='w-full bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-600'>Mulai Ujian</button><button id='guru' class='w-full mt-3 border border-amber-600 text-amber-700 py-2 rounded-lg font-semibold hover:bg-amber-50'>👩‍🏫 Mode Guru</button></div></div>`;
+        app.innerHTML=`<div class='flex h-full items-center justify-center bg-[${s.background_color}] p-4'><div class='max-w-md w-full bg-white p-8 rounded-2xl shadow-xl'><h1 class='text-2xl font-bold text-center mb-2'>${s.exam_title}</h1><p class='text-center mb-1'>${s.school_name}</p><p class='text-center mb-6'>${s.subject_info}</p><div class='mb-4'><label class='font-semibold'>Nama Siswa</label><input id='name' type='text' class='w-full border rounded-lg p-3 mt-2' placeholder='Nama lengkap'></div><div class='mb-6'><label class='font-semibold'>Kelas</label><select id='class' class='w-full border rounded-lg p-3 mt-2'><option value=''>Pilih Kelas</option><option>7.1</option><option>7.2</option><option>7.3</option><option>7.4</option><option>7.5</option><option>7.6</option><option>7.7</option></select></div><button id='start' class='w-full bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-600'>Mulai Ujian</button></div></div>`;
         document.getElementById('start').onclick=async()=>{
           const n=document.getElementById('name').value.trim();
           const c=document.getElementById('class').value;
           if(!n||!c)return alert('Isi nama dan kelas terlebih dahulu!');
           state.studentName=n;state.studentClass=c;
-          shuffleQuestions(); // 🔀 acak soal & opsi di sini
+          shuffleQuestions();
           await goFullScreen();
           state.screen='exam';state.timeLeft=600;state.locked=false;
           startTimer();render();
         };
-        document.getElementById('guru').onclick=()=>{const pin=prompt('Masukkan PIN Guru:');if(pin===s.guru_pin)showGuruView();else alert('PIN salah.');};
       }
 
       else if(state.screen==='exam'){
