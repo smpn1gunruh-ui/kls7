@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ujian Informatika Kelas 7 (Bab 2 - Sistem Komputer)</title>
+  <title>Ujian Informatika Kelas 7 (Bab 1 - Berpikir Komputasional)</title>
   <script src="tailwind.js"></script>
   <style>
     body, html { height: 100%; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
@@ -20,73 +20,58 @@
   <script>
     // ===================== KONFIGURASI =====================
     const config = {
-      exam_title: "Penilaian Bab 2 - Sistem Komputer",
+      exam_title: "Penilaian Bab 1 - Berpikir Komputasional",
       school_name: "SMP Negeri 1 Gunungguruh",
       subject_info: "Informatika Kelas 7",
       background_color: "#f0f9ff"
     };
 
-    // ===================== SOAL BAB 2 =====================
+    // ===================== SOAL BAB 1 =====================
     let questions = [
-      {question:"Apa yang dimaksud dengan sistem komputer?",options:[
-        "Gabungan antara perangkat keras dan lunak yang bekerja sendiri",
-        "Kumpulan perangkat keras, perangkat lunak, dan brainware yang saling berhubungan untuk mengolah data menjadi informasi",
-        "Hanya perangkat keras yang digunakan untuk mengolah data",
-        "Semua perangkat elektronik di rumah"],correct:1},
-
-      {question:"Komponen utama sistem komputer terdiri dari...",options:[
-        "Hardware, Software, Brainware",
-        "CPU, Monitor, Printer",
-        "Keyboard, Mouse, Speaker",
-        "RAM, ROM, Harddisk"],correct:0},
-
-      {question:"Yang termasuk perangkat keras (hardware) adalah...",options:[
-        "Microsoft Word",
-        "Windows 11",
-        "Keyboard",
-        "Google Chrome"],correct:2},
-
-      {question:"Perangkat lunak (software) berfungsi untuk...",options:[
-        "Menampilkan hasil cetak di kertas",
-        "Menjalankan dan mengendalikan perangkat keras komputer",
-        "Menyimpan file di flashdisk",
-        "Menghubungkan komputer ke listrik"],correct:1},
-
-      {question:"Orang yang mengoperasikan atau menggunakan komputer disebut...",options:[
-        "Software",
-        "Hardware",
-        "Operator atau Brainware",
-        "Processor"],correct:2},
-
-      {question:"CPU merupakan singkatan dari...",options:[
-        "Central Processing Unit",
-        "Control Power Unit",
-        "Central Print Utility",
-        "Computer Power Unit"],correct:0},
-
-      {question:"Fungsi utama CPU adalah...",options:[
-        "Menyimpan data dan program",
-        "Mencetak hasil kerja",
-        "Mengolah dan mengontrol jalannya sistem komputer",
-        "Menampilkan gambar di layar"],correct:2},
-
-      {question:"Perangkat input adalah...",options:[
-        "Perangkat untuk menampilkan hasil pengolahan data",
-        "Perangkat untuk memasukkan data ke komputer",
-        "Perangkat untuk menyimpan data",
-        "Perangkat untuk mencetak hasil"],correct:1},
-
-      {question:"Yang termasuk perangkat output adalah...",options:[
-        "Keyboard dan Mouse",
-        "Monitor dan Printer",
-        "CPU dan RAM",
-        "Scanner dan Joystick"],correct:1},
-
-      {question:"Sistem komputer tidak akan dapat bekerja jika...",options:[
-        "Tidak ada software",
-        "Tidak ada hardware",
-        "Tidak ada brainware",
-        "Semua benar"],correct:3}
+      {question:"Apa yang dimaksud dengan berpikir komputasional?",options:[
+        "Cara berpikir menggunakan komputer untuk menyelesaikan masalah",
+        "Cara berpikir logis dan sistematis dalam memecahkan masalah",
+        "Cara berpikir untuk menghafal kode program",
+        "Cara berpikir dengan meniru komputer"],correct:1},
+      {question:"Langkah pertama dalam berpikir komputasional adalah...",options:[
+        "Abstraksi","Pengenalan pola","Dekomposisi","Membuat algoritma"],correct:2},
+      {question:"Apa yang dimaksud dengan dekomposisi?",options:[
+        "Mengabaikan hal-hal yang tidak penting",
+        "Menggabungkan semua bagian masalah",
+        "Mengenali pola-pola dalam masalah",
+        "Memecah masalah besar menjadi bagian-bagian kecil"],correct:3},
+      {question:"Tujuan dari mengenali pola (pattern recognition) adalah...",options:[
+        "Membuat algoritma lebih panjang",
+        "Menemukan kesamaan untuk mempermudah penyelesaian masalah",
+        "Menghapus data yang tidak relevan",
+        "Meningkatkan kecepatan komputer"],correct:1},
+      {question:"Abstraksi dalam berpikir komputasional berarti...",options:[
+        "Menghapus semua data",
+        "Menambahkan detail kecil pada masalah",
+        "Mengabaikan detail yang tidak penting dan fokus pada inti masalah",
+        "Membuat algoritma tanpa berpikir"],correct:2},
+      {question:"Apa itu algoritma?",options:[
+        "Bahasa pemrograman untuk komputer",
+        "Langkah-langkah logis untuk menyelesaikan masalah",
+        "Hasil akhir dari berpikir komputasional",
+        "Urutan angka dan huruf"],correct:1},
+      {question:"Contoh penerapan berpikir komputasional dalam kehidupan sehari-hari adalah...",options:[
+        "Menyalin pekerjaan teman",
+        "Menyusun langkah-langkah memasak makanan",
+        "Menggambar tanpa rencana",
+        "Menebak jawaban tanpa berpikir"],correct:1},
+      {question:"Langkah terakhir dalam berpikir komputasional adalah...",options:[
+        "Menganalisis pola",
+        "Membuat algoritma atau solusi",
+        "Melakukan dekomposisi ulang",
+        "Menghapus abstraksi"],correct:1},
+      {question:"Berikut ini yang bukan termasuk komponen berpikir komputasional adalah...",options:[
+        "Dekomposisi","Abstraksi","Pengenalan pola","Menghafal perintah komputer"],correct:3},
+      {question:"Mengapa berpikir komputasional penting dipelajari?",options:[
+        "Agar siswa dapat menjadi ahli komputer",
+        "Agar dapat memecahkan masalah dengan cara sistematis dan efisien",
+        "Agar dapat membuat robot",
+        "Agar dapat menggunakan internet dengan cepat"],correct:1}
     ];
 
     // ===================== FUNGSI ACAK =====================
@@ -137,29 +122,30 @@
       clearInterval(state.timer);
       const score = calculateScore();
       const correct = state.answers.filter((a,i)=>a===questions[i].correct).length;
-      const data = {
-        name: state.studentName,
-        class: state.studentClass,
-        score,
-        correct,
-        total: questions.length,
-        date: new Date().toLocaleString(),
-        bab: "Bab 2 - Sistem Komputer"
-      };
+const data = {
+  name: state.studentName,
+  class: state.studentClass,
+  score,
+  correct,
+  total: questions.length,
+  date: new Date().toLocaleString(),
+  bab: "Bab 1 - Berpikir Komputasional" // tambahkan baris ini
+};
 
-      // Simpan lokal
+      // Tetap simpan lokal
       const saved = JSON.parse(localStorage.getItem('hasilUjian') || "[]");
       saved.push(data);
       localStorage.setItem('hasilUjian', JSON.stringify(saved));
 
-      // Kirim otomatis ke Google Spreadsheet
-      fetch("https://script.google.com/macros/s/AKfycbzVTgd56dfUMSHugbPkAJlMIpWJ0RDFI8frj4u4hxFSQRWwgDiXAO45WlssyL-KReBwwA/exec", {
+      // 🔄 Kirim otomatis ke Google Spreadsheet
+      fetch("https://script.google.com/macros/s/AKfycbzVTgd56dfUMSHugbPkAJlMIpWJ0RDFI8frj4u4hxFSQRWwgDiXAO45WlssyL-KReBwwA/exec", { // GANTI DENGAN URL MILIKMU
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
 
+      // Tampilkan hasil akhir
       state.screen = 'result';
       state.finalScore = score;
       state.correct = correct;
