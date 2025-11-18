@@ -79,6 +79,73 @@
     }
 
     // ===================== ANTI CHEAT =====================
+    // Kunci: tidak boleh minimize, tidak boleh ganti tab, tidak boleh klik kanan, tidak boleh shortcut,
+    // tidak boleh buka tab baru, mouse tak boleh keluar jendela, log aktivitas
+
+    // === LOG AKTIVITAS ===
+    let activityLog = [];
+    function log(msg){ activityLog.push(`[${new Date().toLocaleTimeString()}] ${msg}`); }
+    log('Ujian dimulai');
+
+    // Blok klik kanan
+    document.addEventListener('contextmenu', e => { e.preventDefault(); log('Coba klik kanan'); });
+
+    // Blok kombinasi tombol tertentu
+    document.addEventListener('keydown', e => {
+      const forbidden = ['F12','Escape'];
+      if (forbidden.includes(e.key) || e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        e.stopPropagation();
+        log(`Shortcut diblokir: ${e.key}`);
+      }
+    });
+
+    // Deteksi pindah tab / minimize
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && state.screen === 'exam') {
+        state.locked = true;
+        clearInterval(state.timer);
+        log('Keluar tab atau minimize — ujian dikunci');
+        alert('Anda keluar dari tab ujian. Ujian dikunci.');
+        render();
+      }
+    });
+
+    // Deteksi keluar fullscreen → kunci
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement && state.screen === "exam") {
+        state.locked = true;
+        clearInterval(state.timer);
+        log('Keluar fullscreen — ujian dikunci');
+        render();
+      }
+    });
+
+    // === PENGUNCIAN MOUSE KELUAR JENDELA ===
+    window.addEventListener('mouseleave', () => {
+      if (state.screen === 'exam' && !state.locked) {
+        state.locked = true;
+        clearInterval(state.timer);
+        log('Mouse keluar jendela — ujian dikunci');
+        alert('Mouse keluar area ujian. Ujian dikunci.');
+        render();
+      }
+    });
+
+    // === BLOK MEMBUKA TAB BARU (CTRL+T), WINDOW BARU, DAN MIDDLE CLICK ===
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey && (e.key === 't' || e.key === 'n')) || e.button === 1) {
+        e.preventDefault();
+        log('Percobaan membuka tab/jendela baru diblokir');
+      }
+    });
+
+    document.addEventListener('mousedown', e => {
+      if (e.button === 1) { // middle click
+        e.preventDefault();
+        log('Middle-click (buka tab baru) diblokir');
+      }
+    });
     // Kunci: tidak boleh minimize, tidak boleh ganti tab, tidak boleh klik kanan, tidak boleh shortcut
 
     // Blok klik kanan
