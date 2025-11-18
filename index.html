@@ -78,7 +78,39 @@
       }
     }
 
-    // *** DIHAPUS: tidak ada peringatan ESC sama sekali ***
+    // ===================== ANTI CHEAT =====================
+    // Kunci: tidak boleh minimize, tidak boleh ganti tab, tidak boleh klik kanan, tidak boleh shortcut
+
+    // Blok klik kanan
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Blok kombinasi tombol
+    document.addEventListener('keydown', e => {
+      const forbidden = ['F12','Escape'];
+      if (forbidden.includes(e.key) || e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+
+    // Deteksi jika siswa pindah tab / minimize
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && state.screen === 'exam') {
+        state.locked = true;
+        clearInterval(state.timer);
+        alert('Anda keluar dari tab ujian. Ujian dikunci.');
+        render();
+      }
+    });
+
+    // Deteksi jika keluar fullscreen → langsung kunci
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement && state.screen === "exam") {
+        state.locked = true;
+        clearInterval(state.timer);
+        render();
+      }
+    }); ***
     // Tidak ada alert saat keluar fullscreen
 
     function selectAnswer(i){if(!state.locked){state.answers[state.current]=i;render();}}
