@@ -18,6 +18,7 @@
   <div id="app" class="h-full"></div>
 
   <script>
+    // ===================== KONFIGURASI =====================
     const config = {
       exam_title: "Penilaian Bab 1 - Berpikir Komputasional",
       school_name: "SMP Negeri 1 Gunungguruh",
@@ -25,19 +26,55 @@
       background_color: "#f0f9ff"
     };
 
+    // ===================== SOAL BAB 1 =====================
     let questions = [
-      {question:"Apa yang dimaksud dengan berpikir komputasional?",options:["Cara berpikir menggunakan komputer untuk menyelesaikan masalah","Cara berpikir logis dan sistematis dalam memecahkan masalah","Cara berpikir untuk menghafal kode program","Cara berpikir dengan meniru komputer"],correct:1},
-      {question:"Langkah pertama dalam berpikir komputasional adalah...",options:["Abstraksi","Pengenalan pola","Dekomposisi","Membuat algoritma"],correct:2},
-      {question:"Apa yang dimaksud dengan dekomposisi?",options:["Mengabaikan hal-hal yang tidak penting","Menggabungkan semua bagian masalah","Mengenali pola-pola dalam masalah","Memecah masalah besar menjadi bagian-bagian kecil"],correct:3},
-      {question:"Tujuan dari mengenali pola (pattern recognition) adalah...",options:["Membuat algoritma lebih panjang","Menemukan kesamaan untuk mempermudah penyelesaian masalah","Menghapus data yang tidak relevan","Meningkatkan kecepatan komputer"],correct:1},
-      {question:"Abstraksi dalam berpikir komputasional berarti...",options:["Menghapus semua data","Menambahkan detail kecil pada masalah","Mengabaikan detail yang tidak penting dan fokus pada inti masalah","Membuat algoritma tanpa berpikir"],correct:2},
-      {question:"Apa itu algoritma?",options:["Bahasa pemrograman untuk komputer","Langkah-langkah logis untuk menyelesaikan masalah","Hasil akhir dari berpikir komputasional","Urutan angka dan huruf"],correct:1},
-      {question:"Contoh penerapan berpikir komputasional dalam kehidupan sehari-hari adalah...",options:["Menyalin pekerjaan teman","Menyusun langkah-langkah memasak makanan","Menggambar tanpa rencana","Menebak jawaban tanpa berpikir"],correct:1},
-      {question:"Langkah terakhir dalam berpikir komputasional adalah...",options:["Menganalisis pola","Membuat algoritma atau solusi","Melakukan dekomposisi ulang","Menghapus abstraksi"],correct:1},
-      {question:"Berikut ini yang bukan termasuk komponen berpikir komputasional adalah...",options:["Dekomposisi","Abstraksi","Pengenalan pola","Menghafal perintah komputer"],correct:3},
-      {question:"Mengapa berpikir komputasional penting dipelajari?",options:["Agar siswa dapat menjadi ahli komputer","Agar dapat memecahkan masalah dengan cara sistematis dan efisien","Agar dapat membuat robot","Agar dapat menggunakan internet dengan cepat"],correct:1}
+      {question:"Apa yang dimaksud dengan berpikir komputasional?",options:[
+        "Cara berpikir menggunakan komputer untuk menyelesaikan masalah",
+        "Cara berpikir logis dan sistematis dalam memecahkan masalah",
+        "Cara berpikir untuk menghafal kode program",
+        "Cara berpikir dengan meniru komputer"],correct:1},
+      {question:"Langkah pertama dalam berpikir komputasional adalah...",options:[
+        "Abstraksi","Pengenalan pola","Dekomposisi","Membuat algoritma"],correct:2},
+      {question:"Apa yang dimaksud dengan dekomposisi?",options:[
+        "Mengabaikan hal-hal yang tidak penting",
+        "Menggabungkan semua bagian masalah",
+        "Mengenali pola-pola dalam masalah",
+        "Memecah masalah besar menjadi bagian-bagian kecil"],correct:3},
+      {question:"Tujuan dari mengenali pola (pattern recognition) adalah...",options:[
+        "Membuat algoritma lebih panjang",
+        "Menemukan kesamaan untuk mempermudah penyelesaian masalah",
+        "Menghapus data yang tidak relevan",
+        "Meningkatkan kecepatan komputer"],correct:1},
+      {question:"Abstraksi dalam berpikir komputasional berarti...",options:[
+        "Menghapus semua data",
+        "Menambahkan detail kecil pada masalah",
+        "Mengabaikan detail yang tidak penting dan fokus pada inti masalah",
+        "Membuat algoritma tanpa berpikir"],correct:2},
+      {question:"Apa itu algoritma?",options:[
+        "Bahasa pemrograman untuk komputer",
+        "Langkah-langkah logis untuk menyelesaikan masalah",
+        "Hasil akhir dari berpikir komputasional",
+        "Urutan angka dan huruf"],correct:1},
+      {question:"Contoh penerapan berpikir komputasional dalam kehidupan sehari-hari adalah...",options:[
+        "Menyalin pekerjaan teman",
+        "Menyusun langkah-langkah memasak makanan",
+        "Menggambar tanpa rencana",
+        "Menebak jawaban tanpa berpikir"],correct:1},
+      {question:"Langkah terakhir dalam berpikir komputasional adalah...",options:[
+        "Menganalisis pola",
+        "Membuat algoritma atau solusi",
+        "Melakukan dekomposisi ulang",
+        "Menghapus abstraksi"],correct:1},
+      {question:"Berikut ini yang bukan termasuk komponen berpikir komputasional adalah...",options:[
+        "Dekomposisi","Abstraksi","Pengenalan pola","Menghafal perintah komputer"],correct:3},
+      {question:"Mengapa berpikir komputasional penting dipelajari?",options:[
+        "Agar siswa dapat menjadi ahli komputer",
+        "Agar dapat memecahkan masalah dengan cara sistematis dan efisien",
+        "Agar dapat membuat robot",
+        "Agar dapat menggunakan internet dengan cepat"],correct:1}
     ];
 
+    // ===================== FUNGSI ACAK =====================
     function shuffleArray(arr) {
       for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -58,6 +95,7 @@
       }));
     }
 
+    // ===================== STATE GLOBAL =====================
     let state = {
       screen: 'start',
       studentName: '',
@@ -69,158 +107,56 @@
       locked: false
     };
 
+    // ===================== UTILITAS =====================
     function formatTime(s){const m=Math.floor(s/60),sec=s%60;return `${m}:${sec.toString().padStart(2,'0')}`;}
-    function startTimer(){state.timer=setInterval(()=>{state.timeLeft--;const t=document.getElementById('timer');if(t){t.textContent=formatTime(state.timeLeft);if(state.timeLeft<=60)t.classList.add('timer-warning');}if(state.timeLeft<=0){clearInterval(state.timer);submitExam();}},1000);}    
-
-    async function goFullScreen(){
-      if(document.documentElement.requestFullscreen){
-        await document.documentElement.requestFullscreen();
-      }
-    }
-
-    // ===================== ANTI CHEAT =====================
-    // Kunci: tidak boleh minimize, tidak boleh ganti tab, tidak boleh klik kanan, tidak boleh shortcut,
-    // tidak boleh buka tab baru, mouse tak boleh keluar jendela, log aktivitas
-
-    // === LOG AKTIVITAS ===
-    let activityLog = [];
-    function log(msg){ activityLog.push(`[${new Date().toLocaleTimeString()}] ${msg}`); }
-    log('Ujian dimulai');
-
-    // Blok klik kanan
-    document.addEventListener('contextmenu', e => { e.preventDefault(); log('Coba klik kanan'); });
-
-    // Blok kombinasi tombol tertentu
-    document.addEventListener('keydown', e => {
-      const forbidden = ['F12','Escape'];
-      if (forbidden.includes(e.key) || e.ctrlKey || e.metaKey) {
-        e.preventDefault();
-        e.stopPropagation();
-        log(`Shortcut diblokir: ${e.key}`);
-      }
-    });
-
-    // Deteksi pindah tab / minimize
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden && state.screen === 'exam') {
-        state.locked = true;
-        clearInterval(state.timer);
-        log('Keluar tab atau minimize — ujian dikunci');
-        alert('Anda keluar dari tab ujian. Ujian dikunci.');
-        render();
-      }
-    });
-
-    // Deteksi keluar fullscreen → kunci
-    document.addEventListener("fullscreenchange", () => {
-      if (!document.fullscreenElement && state.screen === "exam") {
-        state.locked = true;
-        clearInterval(state.timer);
-        log('Keluar fullscreen — ujian dikunci');
-        render();
-      }
-    });
-
-    // === PENGUNCIAN MOUSE KELUAR JENDELA ===
-    window.addEventListener('mouseleave', () => {
-      if (state.screen === 'exam' && !state.locked) {
-        state.locked = true;
-        clearInterval(state.timer);
-        log('Mouse keluar jendela — ujian dikunci');
-        alert('Mouse keluar area ujian. Ujian dikunci.');
-        render();
-      }
-    });
-
-    // === BLOK MEMBUKA TAB BARU (CTRL+T), WINDOW BARU, DAN MIDDLE CLICK ===
-    document.addEventListener('keydown', e => {
-      if ((e.ctrlKey && (e.key === 't' || e.key === 'n')) || e.button === 1) {
-        e.preventDefault();
-        log('Percobaan membuka tab/jendela baru diblokir');
-      }
-    });
-
-    document.addEventListener('mousedown', e => {
-      if (e.button === 1) { // middle click
-        e.preventDefault();
-        log('Middle-click (buka tab baru) diblokir');
-      }
-    });
-    // Kunci: tidak boleh minimize, tidak boleh ganti tab, tidak boleh klik kanan, tidak boleh shortcut
-
-    // Blok klik kanan
-    document.addEventListener('contextmenu', e => e.preventDefault());
-
-    // Blok kombinasi tombol
-    document.addEventListener('keydown', e => {
-      const forbidden = ['F12','Escape'];
-      if (forbidden.includes(e.key) || e.ctrlKey || e.metaKey) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    });
-
-    // Deteksi jika siswa pindah tab / minimize
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden && state.screen === 'exam') {
-        state.locked = true;
-        clearInterval(state.timer);
-        alert('Anda keluar dari tab ujian. Ujian dikunci.');
-        render();
-      }
-    });
-
-    // Deteksi jika keluar fullscreen → langsung kunci
-    document.addEventListener("fullscreenchange", () => {
-      if (!document.fullscreenElement && state.screen === "exam") {
-        state.locked = true;
-        clearInterval(state.timer);
-        render();
-      }
-    }); ***
-    // Tidak ada alert saat keluar fullscreen
+    function startTimer(){state.timer=setInterval(()=>{state.timeLeft--;const t=document.getElementById('timer');if(t){t.textContent=formatTime(state.timeLeft);if(state.timeLeft<=60)t.classList.add('timer-warning');}if(state.timeLeft<=0){clearInterval(state.timer);submitExam();}},1000);}
+    async function goFullScreen(){if(document.documentElement.requestFullscreen){await document.documentElement.requestFullscreen();}}
+    document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&state.screen==="exam"){alert("Anda keluar dari mode full screen! Ujian dikunci.");state.locked=true;clearInterval(state.timer);render();}});
 
     function selectAnswer(i){if(!state.locked){state.answers[state.current]=i;render();}}
     function navigate(d){if(!state.locked){const n=state.current+d;if(n>=0&&n<questions.length)state.current=n;render();}}
-    function calculateScore(){let correct=0;state.answers.forEach((ans,i)=>{if(ans===questions[i].correct)correct++;});return Math.round((correct/questions.length)*100);}    
+    function calculateScore(){let correct=0;state.answers.forEach((ans,i)=>{if(ans===questions[i].correct)correct++;});return Math.round((correct/questions.length)*100);}
 
+    // ===================== SIMPAN OTOMATIS KE SPREADSHEET =====================
     function submitExam(){
       clearInterval(state.timer);
       const score = calculateScore();
       const correct = state.answers.filter((a,i)=>a===questions[i].correct).length;
+const data = {
+  name: state.studentName,
+  class: state.studentClass,
+  score,
+  correct,
+  total: questions.length,
+  date: new Date().toLocaleString(),
+  bab: "Bab 1 - Berpikir Komputasional" // tambahkan baris ini
+};
 
-      const data = {
-        name: state.studentName,
-        class: state.studentClass,
-        score,
-        correct,
-        total: questions.length,
-        date: new Date().toLocaleString(),
-        bab: "Bab 1 - Berpikir Komputasional"
-      };
-
+      // Tetap simpan lokal
       const saved = JSON.parse(localStorage.getItem('hasilUjian') || "[]");
       saved.push(data);
       localStorage.setItem('hasilUjian', JSON.stringify(saved));
 
-      fetch("https://script.google.com/macros/s/AKfycbzVTgd56dfUMSHugbPkAJlMIpWJ0RDFI8frj4u4hxFSQRWwgDiXAO45WlssyL-KReBwwA/exec", {
+      // 🔄 Kirim otomatis ke Google Spreadsheet
+      fetch("https://script.google.com/macros/s/AKfycbzVTgd56dfUMSHugbPkAJlMIpWJ0RDFI8frj4u4hxFSQRWwgDiXAO45WlssyL-KReBwwA/exec", { // GANTI DENGAN URL MILIKMU
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
 
+      // Tampilkan hasil akhir
       state.screen = 'result';
       state.finalScore = score;
       state.correct = correct;
       render();
     }
 
+    // ===================== RENDER =====================
     function render(){
       const app=document.getElementById('app'),s=config;
       if(state.screen==='start'){
         app.innerHTML=`<div class='flex h-full items-center justify-center bg-[${s.background_color}] p-4'><div class='max-w-md w-full bg-white p-8 rounded-2xl shadow-xl'><h1 class='text-2xl font-bold text-center mb-2'>${s.exam_title}</h1><p class='text-center mb-1'>${s.school_name}</p><p class='text-center mb-6'>${s.subject_info}</p><div class='mb-4'><label class='font-semibold'>Nama Siswa</label><input id='name' type='text' class='w-full border rounded-lg p-3 mt-2' placeholder='Nama lengkap'></div><div class='mb-6'><label class='font-semibold'>Kelas</label><select id='class' class='w-full border rounded-lg p-3 mt-2'><option value=''>Pilih Kelas</option><option>7.1</option><option>7.2</option><option>7.3</option><option>7.4</option><option>7.5</option><option>7.6</option><option>7.7</option></select></div><button id='start' class='w-full bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-600'>Mulai Ujian</button></div></div>`;
-
         document.getElementById('start').onclick=async()=>{
           const n=document.getElementById('name').value.trim();
           const c=document.getElementById('class').value;
@@ -235,8 +171,7 @@
 
       else if(state.screen==='exam'){
         const q=questions[state.current];
-        app.innerHTML=`<div class='flex flex-col h-full bg-[${s.background_color}]'><div class='p-4 bg-white shadow flex justify-between items-center'><div><h2 class='font-bold'>${state.studentName}</h2><p class='text-sm'>Kelas ${state.studentClass} • Soal ${state.current+1}/${questions.length}</p></div><div class='text-right'><div id='timer' class='font-bold text-blue-600 text-xl'>${formatTime(state.timeLeft)}</div><p class='text-sm text-slate-600'>Waktu tersisa</p></div></div><div class='flex-1 overflow-y-auto p-4'><div class='max-w-3xl mx-auto bg-white p-6 rounded-xl shadow question-card'><div class='flex mb-4'><span class='bg-blue-500 text-white px-3 py-1 rounded-lg mr-3 font-bold'>${state.current+1}</span><p class='font-semibold'>${q.question}</p></div><div class='space-y-3'>${q.options.map((opt,i)=>{const sel=state.answers[state.current]===i;return `<button class='option-button w-full text-left p-3 border-2 rounded-lg ${sel?'bg-green-500 text-white border-green-600':'border-slate-300'}' data-i='${i}'><span class='font-bold'>${String.fromCharCode(65+i)}.</span> ${opt}</button>`;}).join('')}</div></div><div class='flex justify-between mt-6'><button id='prev' class='px-4 py-2 rounded-lg border border-blue-600 text-blue-700 font-semibold ${state.current===0?'opacity-50 cursor-not-allowed':''}'>← Sebelumnya</button>${state.current===questions.length-1?`<button id='submit' class='px-6 py-2 bg-green-600 text-white font-bold rounded-lg'>Selesai & Kirim</button>`:`<button id='next' class='px-6 py-2 bg-blue-600 text-white font-bold rounded-lg'>Selanjutnya →</button>`}</div></div></div>`;
-
+        app.innerHTML=`<div class='flex flex-col h-full bg-[${s.background_color}]'><div class='p-4 bg-white shadow flex justify-between items-center'><div><h2 class='font-bold'>${state.studentName}</h2><p class='text-sm'>Kelas ${state.studentClass} • Soal ${state.current+1}/${questions.length}</p></div><div class='text-right'><div id='timer' class='font-bold text-blue-600 text-xl'>${formatTime(state.timeLeft)}</div><p class='text-sm text-slate-600'>Waktu tersisa</p></div></div><div class='flex-1 overflow-y-auto p-4'>${state.locked?`<div class='text-center mt-20 text-red-600 font-bold text-xl'>Ujian dikunci karena keluar dari fullscreen.</div>`:`<div class='max-w-3xl mx-auto bg-white p-6 rounded-xl shadow question-card'><div class='flex mb-4'><span class='bg-blue-500 text-white px-3 py-1 rounded-lg mr-3 font-bold'>${state.current+1}</span><p class='font-semibold'>${q.question}</p></div><div class='space-y-3'>${q.options.map((opt,i)=>{const sel=state.answers[state.current]===i;return `<button class='option-button w-full text-left p-3 border-2 rounded-lg ${sel?'bg-green-500 text-white border-green-600':'border-slate-300'}' data-i='${i}'><span class='font-bold'>${String.fromCharCode(65+i)}.</span> ${opt}</button>`;}).join('')}</div></div><div class='flex justify-between mt-6'><button id='prev' class='px-4 py-2 rounded-lg border border-blue-600 text-blue-700 font-semibold ${state.current===0?'opacity-50 cursor-not-allowed':''}'>← Sebelumnya</button>${state.current===questions.length-1?`<button id='submit' class='px-6 py-2 bg-green-600 text-white font-bold rounded-lg'>Selesai & Kirim</button>`:`<button id='next' class='px-6 py-2 bg-blue-600 text-white font-bold rounded-lg'>Selanjutnya →</button>`}</div>`}</div></div>`;
         document.querySelectorAll('[data-i]')?.forEach(b=>b.onclick=()=>selectAnswer(parseInt(b.dataset.i)));
         document.getElementById('prev')?.addEventListener('click',()=>navigate(-1));
         document.getElementById('next')?.addEventListener('click',()=>navigate(1));
